@@ -39,6 +39,7 @@ class Question(models.Model):
     gender = models.PositiveSmallIntegerField(
         choices=GENDER_CHOICES, null=True, blank=True, help_text="user gender filter")
     body = models.TextField()
+    date_created = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
