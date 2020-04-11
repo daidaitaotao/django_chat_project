@@ -1,0 +1,29 @@
+[
+{
+    "model": "accounts.userprofile",
+    "pk": 3,
+    "fields": {
+        "user": 5,
+        "birth_date": "1989-04-11",
+        "gender": 2
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 4,
+    "fields": {
+        "user": 6,
+        "birth_date": "2000-04-11",
+        "gender": 1
+    }
+},
+{
+    "model": "accounts.userprofile",
+    "pk": 5,
+    "fields": {
+        "user": 7,
+        "birth_date": "1999-03-11",
+        "gender": 3
+    }
+}
+]

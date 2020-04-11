@@ -8,5 +8,8 @@ from django.contrib.auth.models import User
 def user_post_create_handler(sender, instance, created, **kwargs):
     """
     """
+    if kwargs['raw']:
+        return
+
     if created:
         UserProfile.objects.create(user=instance)

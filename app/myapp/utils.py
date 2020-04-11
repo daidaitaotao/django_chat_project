@@ -1,4 +1,5 @@
 import difflib
+from functools import wraps
 
 
 def get_text_diff(before: str, after: str) -> dict:

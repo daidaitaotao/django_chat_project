@@ -5,26 +5,29 @@ from django.db import models
 from accounts.models import User
 from django.contrib.postgres.fields import JSONField
 from accounts.constants import GENDER_CHOICES
+from myapp.constants import RESPONSE_TYPES_CHOICE, QUESTION_TOPIC_CHOICE
 
 
 class BaseQuestion(models.Model):
-    INT = 1
-    TEXT = 2
-    BOOL = 3
-    RESPONSE_TYPES_CHOICE = (
-        (INT, 'integer'),
-        (TEXT, 'text'),
-        (BOOL, 'boolean'),
-    )
     response_type = models.PositiveSmallIntegerField(
         choices=RESPONSE_TYPES_CHOICE,
         null=True,
         blank=True,
-        help_text="hint for what type of response expect from end user"
+        help_text="hint for what type of response expect from end user",
+    )
+    topic = models.CharField(
+        max_length=225,
+        choices=QUESTION_TOPIC_CHOICE,
+        blank=True,
+        null=True,
+        help_text="question topic",
     )
     date_created = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     body = models.TextField()
+
+    def __str__(self):
+        return self.body[:50]
 
 
 class Question(models.Model):
@@ -41,6 +44,9 @@ class Question(models.Model):
     body = models.TextField()
     date_created = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.body[:50]
 
 
 class QuestionChangeHistory(models.Model):
@@ -80,3 +86,6 @@ class Response(models.Model):
         on_delete=models.CASCADE,
     )
     body = models.CharField(max_length=1024)
+
+    def __str__(self):
+        return self.body[:50]

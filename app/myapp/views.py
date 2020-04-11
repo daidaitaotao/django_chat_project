@@ -51,9 +51,15 @@ class BaseQuestionListCreateView(generics.ListCreateAPIView):
     """
         API endpoint that allows users to view and create base question
     """
-    queryset = BaseQuestion.objects.all()
     serializer_class = BaseQuestionSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        topic = self.request.query_params.get("topic")
+        queryset = BaseQuestion.objects.all()
+        if topic:
+            queryset = queryset.filter(base_question_topic=topic)
+        return queryset
 
     def get(self, request, *args, **kwargs):
         if request.user.is_superuser:
@@ -86,9 +92,12 @@ class QuestionListCreateView(generics.ListCreateAPIView):
 
     def get_queryset(self):
         base_question_id = self.request.query_params.get("base_question")
+        topic = self.request.query_params.get("topic")
         queryset = Question.objects.all()
         if base_question_id:
             queryset = queryset.filter(base_question_id=base_question_id)
+        if topic:
+            queryset = queryset.filter(base_question_topic=topic)
 
         return queryset
 

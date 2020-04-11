@@ -20,6 +20,7 @@ class BaseQuestionSerializer(serializers.ModelSerializer):
         model = BaseQuestion
         fields = (
             'response_type',
+            'topic',
             'body',
             'date_created',
             'updated_at',
