@@ -28,9 +28,12 @@ with open(os.path.join(PROJECT_SETTINGS_DIR, "settings.yaml"), "r") as settings_
 SECRET_KEY = os.environ.get("SECRET_KEY") or settings_data["SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = int(os.environ.get("DEBUG", default=0))
+DEBUG = int(os.environ.get("DEBUG", default=1))
 
-ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS", '').split(" ")
+if os.getenv("DJANGO_ALLOWED_HOSTS"):
+    ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", " ").split(" ")
+else:
+    ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -61,7 +64,7 @@ ROOT_URLCONF = 'mysite.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,3 +132,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+LOGIN_URL = 'login'
+LOGOUT_URL = 'logout'
+LOGIN_REDIRECT_URL = 'home'
