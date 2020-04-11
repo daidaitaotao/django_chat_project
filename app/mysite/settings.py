@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'myapp',
+    'accounts',
 ]
 
 MIDDLEWARE = [
@@ -86,9 +87,9 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.postgresql"),
-        "NAME": os.environ.get("SQL_DATABASE", "django_chat"),
-        "USER": os.environ.get("SQL_USER", "local_user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "password123"),
+        "NAME": os.environ.get("SQL_DATABASE", settings_data["DB_NAME"]),
+        "USER": os.environ.get("SQL_USER", settings_data["DB_USER"]),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", settings_data["DB_USER_PASSWORD"]),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }

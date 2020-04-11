@@ -1,1 +1,4 @@
 SECRET_KEY: "foo"
+DB_NAME: "django_chat"
+DB_USER: "local_user"
+DB_USER_PASSWORD: "password123"
